@@ -1,66 +1,103 @@
 // pages/content/content.ts
+import { ContentListSchema, ContentSchema, Response, SavedSchema } from "../../utils/schema";
+import { content, contents, contentSave } from "../../utils/content";
+import { OK } from "../../utils/constant";
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        id: 0,
+        contents: [],
+        popup: {
+            visible: false,
+            id: 0,
+            title: "",
+            content: ""
+        },
+    },
 
-  },
+    onLoad(option) {
+        this.setData({
+            id: parseInt(option.id)
+        })
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad() {
+    async onShow() {
+        await this.fetchContents()
+    },
 
-  },
+    async fetchContents() {
+        const res: Response<ContentListSchema> = await contents(this.data.id)
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+        this.setData({
+            contents: res.data.list
+        })
+    },
 
-  },
+    async bindTapItem(option: any) {
+        const id: number = option.currentTarget.dataset.id
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+        const res: Response<ContentSchema> = await content(id)
 
-  },
+        this.setData({
+            popup: {
+                visible: true,
+                id: res.data.id,
+                title: res.data.title,
+                content: res.data.content
+            }
+        });
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
+    async bindContentSave() {
+        const res: Response<SavedSchema> = await contentSave({
+            secret_id: this.data.id,
+            ...this.data.popup
+        })
 
-  },
+        if (res.code !== OK) {
+            await wx.showModal({
+                title: res.message
+            })
+        }
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
+        await this.cancelPopup()
+        await this.fetchContents()
+    },
 
-  },
+    onVisibleChange(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["popup.visible"]: e.detail.visible,
+        });
+    },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
+    async cancelPopup() {
+        this.setData({ popup: { visible: false, title: "", content: "" } })
+    },
 
-  },
+    async onContentChanged(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["popup.content"]: e.detail.value
+        });
+    },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
+    async onTitleChanged(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["popup.title"]: e.detail.value
+        });
+    },
 
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
+    showPopup() {
+        this.setData({
+            popup:{
+                visible: true,
+                id: 0,
+                title: "",
+                content: ""
+            }
+        });
+    },
 })

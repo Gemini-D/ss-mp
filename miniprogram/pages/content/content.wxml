@@ -1,2 +1,19 @@
-<!--pages/content/content.wxml-->
-<text>pages/content/content.wxml</text>
+<view class="wrapper">
+    <ad unit-id="adunit-f21c4c6a8adb751f"></ad>
+    <t-divider content="内容列表" align="left"/>
+    <t-cell wx:for="{{contents}}" title="{{item.title}}"
+            data-id="{{item.id}}" align="top" hover arrow bordered="{{false}}"
+            bindtap="bindTapItem">
+    </t-cell>
+    <t-fab icon="add" bind:click="showPopup" aria-label="新增内容"></t-fab>
+    <t-popup visible="{{popup.visible}}" bind:visible-change="onVisibleChange" placement="bottom">
+        <view class="block">
+            <view class="wrapper">
+                <t-input label="标题" placeholder="请输入标题" value="{{popup.title}}" bindchange="onTitleChanged"></t-input>
+                <t-textarea placeholder="请输入内容" disableDefaultPadding="{{true}}"
+                            value="{{popup.content}}" bindchange="onContentChanged"/>
+                <t-button theme="primary" size="large" block bindtap="bindContentSave">确定</t-button>
+            </view>
+        </view>
+    </t-popup>
+</view>

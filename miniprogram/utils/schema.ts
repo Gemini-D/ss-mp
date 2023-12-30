@@ -24,3 +24,15 @@ export interface SecretSchema {
     id: number
     user_id: number
 }
+
+export interface ContentListSchema {
+    count: number,
+    list: ContentSchema[]
+}
+
+export interface ContentSchema {
+    id: number
+    secret_id: number
+    title: string
+    content: string
+}

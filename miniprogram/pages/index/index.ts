@@ -24,7 +24,12 @@ Page({
             wx.showModal({
                 title: res.message
             })
+            return
         }
+
+        await wx.navigateTo({
+            url: `/pages/content/content?id=${res.data.id}`
+        })
     },
 
     async onSecretChanged(e: WechatMiniprogram.TouchEvent) {

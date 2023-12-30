@@ -18,7 +18,7 @@ export function post(path: string, body: any): Promise<Response<any>> {
                 const data: Response<any> = res.data;
                 if (data.code === TOKEN_INVALID) {
                     await login()
-                    resolve(await get(path, body))
+                    resolve(await post(path, body))
                     return
                 }
                 resolve(data)
@@ -43,7 +43,7 @@ export function del(path: string, body: any = null): Promise<Response<any>> {
                 const data: Response<any> = res.data;
                 if (data.code === TOKEN_INVALID) {
                     await login()
-                    resolve(await get(path, body))
+                    resolve(await del(path, body))
                     return
                 }
                 resolve(data)

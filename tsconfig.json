@@ -26,5 +26,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "tdesign-miniprogram/*":["./miniprogram/miniprogram_npm/tdesign-miniprogram/*"]
 }

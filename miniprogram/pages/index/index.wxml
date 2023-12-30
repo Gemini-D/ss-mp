@@ -7,11 +7,8 @@
         <t-button theme="primary" size="large" block bindtap="bindSecretCheck">验证</t-button>
     </view>
     <t-fab icon="add" bind:click="showPopup" aria-label="新增密码"></t-fab>
-    <t-popup visible="{{popup.visible}}" bind:visible-change="onVisibleChange" placement="top">
+    <t-popup visible="{{popup.visible}}" bind:visible-change="onVisibleChange" placement="bottom">
         <view class="block">
-            <view class="ad">
-                <ad unit-id="adunit-09fb6f26992a5616" ad-type="video" ad-theme="white"></ad>
-            </view>
             <view class="header">
                 <view class="title">新增密码</view>
             </view>

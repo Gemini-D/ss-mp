@@ -1,11 +1,17 @@
 import { userInfo } from "../../utils/user";
-import { secretCheck } from "../../utils/secret";
-import { Response, SecretSchema } from "../../utils/schema";
+import { secretCheck, secretCreate } from "../../utils/secret";
+import { Response, SavedSchema, SecretSchema } from "../../utils/schema";
 import { OK } from "../../utils/constant";
 
 Page({
     data: {
-        secret: ""
+        secret: "",
+        popup: {
+            visible: false,
+        },
+        form: {
+            value: ""
+        }
     },
 
     async onLoad() {
@@ -25,5 +31,38 @@ Page({
         this.setData({
             secret: e.detail.value
         });
-    }
+    },
+
+    async bindSecretCreate() {
+        const res: Response<SavedSchema> = await secretCreate(this.data.secret)
+        if (res.code !== OK) {
+            wx.showModal({
+                title: res.message
+            })
+            return
+        }
+
+        this.setData({
+            ["popup.visible"]: false,
+        });
+    },
+
+    async onValueChanged(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["form.value"]: e.detail.value
+        });
+    },
+
+    onVisibleChange(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["popup.visible"]: e.detail.visible,
+        });
+    },
+
+    showPopup() {
+        this.setData({
+            ["popup.visible"]: true,
+            ["form.value"]: ""
+        });
+    },
 })

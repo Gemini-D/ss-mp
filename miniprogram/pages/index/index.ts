@@ -34,7 +34,7 @@ Page({
     },
 
     async bindSecretCreate() {
-        const res: Response<SavedSchema> = await secretCreate(this.data.secret)
+        const res: Response<SavedSchema> = await secretCreate(this.data.form.value)
         if (res.code !== OK) {
             wx.showModal({
                 title: res.message

@@ -1,1 +1,0 @@
-export const BASE_URI: string = "http://127.0.0.1:9501"

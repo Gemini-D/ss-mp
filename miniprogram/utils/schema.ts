@@ -19,3 +19,8 @@ export interface SavedSchema {
     value: string,
     number: number
 }
+
+export interface SecretSchema {
+    id: number
+    user_id: number
+}

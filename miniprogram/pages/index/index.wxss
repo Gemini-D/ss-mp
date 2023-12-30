@@ -1,1 +1,51 @@
-/* pages/index/index.wxss */
+.wrapper {
+    margin: 32rpx;
+    display: block;
+    --td-cell-image-height: 130rpx;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 116rpx;
+}
+
+.title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.btn {
+    font-size: 32rpx;
+    padding: 32rpx;
+}
+
+.btn--cancel {
+    color: rgba(0, 0, 0, .6);
+}
+
+.btn--confirm {
+    color: #0052d9;
+}
+
+.ad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder {
+    height: 50rpx;
+}
+
+.button {
+    margin: 0 32rpx;
+}

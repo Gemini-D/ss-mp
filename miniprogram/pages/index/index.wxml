@@ -1,2 +1,9 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<view class="wrapper">
+    <ad unit-id="adunit-f21c4c6a8adb751f"></ad>
+    <view class="placeholder"></view>
+    <t-input label="密码" placeholder="请输入密码" value="{{secret}}" bindchange="onSecretChanged"/>
+    <view class="placeholder"></view>
+    <view class="button">
+        <t-button theme="primary" size="large" block bindtap="bindSecretCheck">验证</t-button>
+    </view>
+</view>

@@ -1,5 +1,5 @@
 <view class="wrapper">
-    <ad unit-id="adunit-f21c4c6a8adb751f"></ad>
+    <ad unit-id="adunit-6cb58bbc9dd3adb5"></ad>
     <view class="placeholder"></view>
     <t-input label="密码" placeholder="请输入密码" value="{{secret}}" bindchange="onSecretChanged"/>
     <view class="placeholder"></view>
@@ -13,9 +13,10 @@
                 <view class="title">新增密码</view>
             </view>
             <view class="wrapper">
-                <t-input label="密码" placeholder="请输入密码" value="{{form.value}}" bindchange="onValueChanged"></t-input>
+                <t-input label="密码" placeholder="请输入密码" value="{{form.value}}"
+                         bindchange="onValueChanged"></t-input>
                 <view class="placeholder"></view>
-                <t-button theme="primary" size="large" block  bindtap="bindSecretCreate">确定</t-button>
+                <t-button theme="primary" size="large" block bindtap="bindSecretCreate">确定</t-button>
             </view>
         </view>
     </t-popup>

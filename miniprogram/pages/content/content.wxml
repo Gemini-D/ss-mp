@@ -1,5 +1,5 @@
 <view class="wrapper">
-    <ad unit-id="adunit-f21c4c6a8adb751f"></ad>
+    <ad unit-id="adunit-61ff3f4d937ee88f"></ad>
     <t-divider content="内容列表" align="left"/>
     <t-cell wx:for="{{contents}}" title="{{item.title}}"
             data-id="{{item.id}}" align="top" hover arrow bordered="{{false}}"

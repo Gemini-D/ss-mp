@@ -16,6 +16,10 @@ Page({
 
     async onLoad() {
         await userInfo()
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: [ 'shareAppMessage', 'shareTimeline' ]
+        })
     },
 
     async bindSecretCheck() {

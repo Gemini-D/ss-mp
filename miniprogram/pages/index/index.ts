@@ -1,6 +1,6 @@
 import { userInfo } from "../../utils/user";
 import { secretCheck, secretCreate } from "../../utils/secret";
-import { Response, SavedSchema, SecretSchema } from "../../utils/schema";
+import { Response, SavedSchema, SecretSchema, UserSchema } from "../../utils/schema";
 import { OK } from "../../utils/constant";
 
 Page({
@@ -15,7 +15,13 @@ Page({
     },
 
     async onLoad() {
-        await userInfo()
+        const info: Response<UserSchema> = await userInfo()
+        if (!info.data.has_secret) {
+            wx.showModal({
+                title: "提示",
+                content: "您还没有创建过密钥，请点击右下角的按钮添加密钥"
+            })
+        }
         wx.showShareMenu({
             withShareTicket: true,
             menus: [ 'shareAppMessage', 'shareTimeline' ]

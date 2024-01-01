@@ -10,6 +10,7 @@ export interface LoginSchema {
 
 export interface UserSchema {
     id: number
+    has_secret: boolean
     created_at: string
     updated_at: string
 }

@@ -1,4 +1,5 @@
 <view class="wrapper">
+    <view style="height:160rpx"></view>
     <ad unit-id="adunit-61ff3f4d937ee88f"></ad>
     <t-divider content="内容列表" align="left"/>
     <t-cell wx:for="{{contents}}" title="{{item.title}}"

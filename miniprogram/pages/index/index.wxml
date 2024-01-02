@@ -1,4 +1,5 @@
 <view class="wrapper">
+    <view style="height:160rpx"></view>
     <ad unit-id="adunit-6cb58bbc9dd3adb5"></ad>
     <view class="placeholder"></view>
     <t-input label="密码" placeholder="请输入密码" value="{{secret}}" bindchange="onSecretChanged"/>

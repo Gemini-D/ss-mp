@@ -36,4 +36,5 @@ export interface ContentSchema {
     secret_id: number
     title: string
     content: string
+    type: number
 }

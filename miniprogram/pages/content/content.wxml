@@ -11,6 +11,7 @@
         <view class="block">
             <view class="wrapper">
                 <t-input label="标题" placeholder="请输入标题" value="{{popup.title}}" bindchange="onTitleChanged"></t-input>
+                <t-radio-group bind:change="onTypeChanged" value="{{popup.type}}" options="{{typeSelector}}" t-class="box" />
                 <t-textarea placeholder="请输入内容" disableDefaultPadding="{{true}}"
                             value="{{popup.content}}" bindchange="onContentChanged"/>
                 <t-button theme="primary" size="large" block bindtap="bindContentSave">确定</t-button>

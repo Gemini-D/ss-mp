@@ -15,8 +15,26 @@ Page({
             visible: false,
             id: 0,
             title: "",
-            content: ""
+            content: "",
+            type: 0
         },
+        typeSelector: [
+            {
+                label: '文本',
+                value: 0,
+                block: false,
+            },
+            {
+                label: '音频',
+                value: 1,
+                block: false,
+            },
+            {
+                label: '视频',
+                value: 2,
+                block: false,
+            },
+        ]
     },
 
     onLoad(option) {
@@ -47,7 +65,8 @@ Page({
                 visible: true,
                 id: res.data.id,
                 title: res.data.title,
-                content: res.data.content
+                content: res.data.content,
+                type: res.data.type
             }
         });
     },
@@ -75,7 +94,13 @@ Page({
     },
 
     async cancelPopup() {
-        this.setData({ popup: { visible: false, title: "", content: "" } })
+        this.setData({ popup: { visible: false, title: "", content: "", type: 0 } })
+    },
+
+    async onTypeChanged(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["popup.type"]: e.detail.value
+        });
     },
 
     async onContentChanged(e: WechatMiniprogram.TouchEvent) {
@@ -92,11 +117,12 @@ Page({
 
     showPopup() {
         this.setData({
-            popup:{
+            popup: {
                 visible: true,
                 id: 0,
                 title: "",
-                content: ""
+                content: "",
+                type: 0
             }
         });
     },

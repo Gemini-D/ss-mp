@@ -8,6 +8,8 @@
     "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
     "t-textarea": "tdesign-miniprogram/textarea/textarea",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-fab": "tdesign-miniprogram/fab/fab"
+    "t-fab": "tdesign-miniprogram/fab/fab",
+    "t-radio": "tdesign-miniprogram/radio/radio",
+    "t-radio-group": "tdesign-miniprogram/radio-group/radio-group"
   }
 }

@@ -20,7 +20,8 @@ Page({
         },
         detailPopup: {
             visible: false,
-            content: ""
+            content: "",
+            type: 0
         },
         typeSelector: [
             {
@@ -36,6 +37,11 @@ Page({
             {
                 label: '视频',
                 value: 2,
+                block: false,
+            },
+            {
+                label: '图片',
+                value: 3,
                 block: false,
             },
         ]
@@ -155,7 +161,8 @@ Page({
                     ["popup.visible"]: false,
                     detailPopup: {
                         visible: true,
-                        content: res.data.content
+                        content: res.data.content,
+                        type: res.data.type
                     }
                 });
                 break

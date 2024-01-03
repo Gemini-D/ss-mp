@@ -23,7 +23,10 @@
     <t-action-sheet id="t-action-sheet" bind:selected="handleSelected"/>
     <t-popup visible="{{detailPopup.visible}}" bind:visible-change="onDetailVisibleChange" placement="center">
         <view class="wrapper">
-            <view class="block block--center">{{detailPopup.content}}</view>
+            <view wx:if="{{detailPopup.type === 0}}" class="block block--center">{{detailPopup.content}}</view>
+            <view wx:if="{{detailPopup.type === 3}}" class="block block--center">
+                <image src="{{detailPopup.content}}" mode="widthFix" style="width: 100%"/>
+            </view>
         </view>
     </t-popup>
 </view>

@@ -12,14 +12,25 @@
             <view class="wrapper">
                 <t-input label="标题" placeholder="请输入标题" value="{{popup.title}}"
                          bindchange="onTitleChanged"></t-input>
-                <t-radio-group bind:change="onTypeChanged" value="{{popup.type}}" options="{{typeSelector}}"
-                               t-class="box"/>
+                <t-cell class="mb-16" title="选择类型" arrow hover note="{{popup.typeStr}}" bind:click="onTypePickerChicked" />
                 <t-textarea placeholder="请输入内容" disableDefaultPadding="{{true}}"
                             value="{{popup.content}}" bindchange="onContentChanged"/>
                 <t-button theme="primary" size="large" block bindtap="bindContentSave">确定</t-button>
             </view>
         </view>
     </t-popup>
+    <t-picker
+            visible="{{picker.visible}}"
+            value="{{popup.type}}"
+            data-key="city"
+            title="选择类型"
+            cancelBtn="取消"
+            confirmBtn="确认"
+            bindchange="onPickerChange"
+            bindcancel="onPickerCancel"
+    >
+        <t-picker-item options="{{typeSelector}}" />
+    </t-picker>
     <t-action-sheet id="t-action-sheet" bind:selected="handleSelected"/>
     <t-popup visible="{{detailPopup.visible}}" bind:visible-change="onDetailVisibleChange" placement="center">
         <view class="wrapper">

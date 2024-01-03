@@ -16,12 +16,16 @@ Page({
             id: 0,
             title: "",
             content: "",
-            type: 0
+            type: 0,
+            typeStr: ""
         },
         detailPopup: {
             visible: false,
             content: "",
             type: 0
+        },
+        picker: {
+            visible: false,
         },
         typeSelector: [
             {
@@ -74,7 +78,8 @@ Page({
                 id: res.data.id,
                 title: res.data.title,
                 content: res.data.content,
-                type: res.data.type
+                type: res.data.type,
+                typeStr:res.data.type_str
             }
         });
     },
@@ -108,13 +113,7 @@ Page({
     },
 
     async cancelPopup() {
-        this.setData({ popup: { visible: false, title: "", content: "", type: 0 } })
-    },
-
-    async onTypeChanged(e: WechatMiniprogram.TouchEvent) {
-        this.setData({
-            ["popup.type"]: e.detail.value
-        });
+        this.setData({ popup: { visible: false, title: "", content: "", type: 0, typeStr: "" } })
     },
 
     async onContentChanged(e: WechatMiniprogram.TouchEvent) {
@@ -179,7 +178,31 @@ Page({
                 id: 0,
                 title: "",
                 content: "",
-                type: 0
+                type: 0,
+                typeStr: ""
+            }
+        });
+    },
+
+    onTypePickerChicked() {
+        this.setData({
+            picker: {
+                visible: true
+            }
+        });
+    },
+
+    onPickerChange(e) {
+        this.setData({
+            ["popup.type"]: e.detail.value[0],
+            ["popup.typeStr"]: e.detail.label[0],
+        })
+    },
+
+    onPickerCancel(e) {
+        this.setData({
+            picker: {
+                visible: false
             }
         });
     },

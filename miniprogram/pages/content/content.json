@@ -11,6 +11,8 @@
     "t-fab": "tdesign-miniprogram/fab/fab",
     "t-radio": "tdesign-miniprogram/radio/radio",
     "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
-    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
+    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet",
+    "t-picker": "tdesign-miniprogram/picker/picker",
+    "t-picker-item": "tdesign-miniprogram/picker-item/picker-item"
   }
 }

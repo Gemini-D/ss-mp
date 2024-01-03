@@ -1,6 +1,6 @@
-// pages/content/content.ts
 import { ContentListSchema, ContentSchema, Response, SavedSchema } from "../../utils/schema";
 import { content, contents, contentSave } from "../../utils/content";
+import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { OK } from "../../utils/constant";
 
 Page({
@@ -55,9 +55,7 @@ Page({
         })
     },
 
-    async bindTapItem(option: any) {
-        const id: number = option.currentTarget.dataset.id
-
+    async bindEdit(id: number) {
         const res: Response<ContentSchema> = await content(id)
 
         this.setData({
@@ -112,6 +110,25 @@ Page({
     async onTitleChanged(e: WechatMiniprogram.TouchEvent) {
         this.setData({
             ["popup.title"]: e.detail.value
+        });
+    },
+
+    bindTapItem(e: WechatMiniprogram.TouchEvent) {
+        console.log(e)
+        ActionSheet.show({
+            theme: ActionSheetTheme.List,
+            selector: '#t-action-sheet',
+            context: this,
+            items: [
+                {
+                    label: '查看',
+                    index: 1
+                },
+                {
+                    label: '编辑',
+                    index: 2
+                },
+            ],
         });
     },
 

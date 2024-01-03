@@ -18,4 +18,5 @@
             </view>
         </view>
     </t-popup>
+    <t-action-sheet id="t-action-sheet" bind:selected="handleSelected" />
 </view>

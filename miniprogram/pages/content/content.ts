@@ -22,6 +22,7 @@ Page({
         detailPopup: {
             visible: false,
             content: "",
+            title:"",
             type: 0
         },
         picker: {
@@ -161,6 +162,7 @@ Page({
                     detailPopup: {
                         visible: true,
                         content: res.data.content,
+                        title: res.data.title,
                         type: res.data.type
                     }
                 });

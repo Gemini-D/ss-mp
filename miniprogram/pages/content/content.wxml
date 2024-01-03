@@ -12,7 +12,8 @@
             <view class="wrapper">
                 <t-input label="标题" placeholder="请输入标题" value="{{popup.title}}"
                          bindchange="onTitleChanged"></t-input>
-                <t-cell class="mb-16" title="选择类型" arrow hover note="{{popup.typeStr}}" bind:click="onTypePickerChicked" />
+                <t-cell class="mb-16" title="选择类型" arrow hover note="{{popup.typeStr}}"
+                        bind:click="onTypePickerChicked"/>
                 <t-textarea placeholder="请输入内容" disableDefaultPadding="{{true}}"
                             value="{{popup.content}}" bindchange="onContentChanged"/>
                 <t-button theme="primary" size="large" block bindtap="bindContentSave">确定</t-button>
@@ -29,12 +30,25 @@
             bindchange="onPickerChange"
             bindcancel="onPickerCancel"
     >
-        <t-picker-item options="{{typeSelector}}" />
+        <t-picker-item options="{{typeSelector}}"/>
     </t-picker>
     <t-action-sheet id="t-action-sheet" bind:selected="handleSelected"/>
     <t-popup visible="{{detailPopup.visible}}" bind:visible-change="onDetailVisibleChange" placement="center">
         <view class="wrapper">
-            <view wx:if="{{detailPopup.type === 0}}" class="block block--center">{{detailPopup.content}}</view>
+            <view wx:if="{{detailPopup.type === 0}}" class="block block--center"><text>{{detailPopup.content}}</text></view>
+            <view wx:if="{{detailPopup.type === 1}}" class="block block--center">
+                <audio name="{{detailPopup.title}}" src="{{detailPopup.content}}" id="audio" controls loop></audio>
+            </view>
+            <view wx:if="{{detailPopup.type === 2}}" class="block block--center" style="height:1000rpx">
+                <video
+                        id="video"
+                        src="{{ detailPopup.content}}"
+                        show-center-play-btn='{{false}}'
+                        show-play-btn="{{true}}"
+                        controls
+                        picture-in-picture-mode="{{['push', 'pop']}}"
+                ></video>
+            </view>
             <view wx:if="{{detailPopup.type === 3}}" class="block block--center">
                 <image src="{{detailPopup.content}}" mode="widthFix" style="width: 100%"/>
             </view>

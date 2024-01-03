@@ -60,3 +60,8 @@ video {
     justify-content: space-between;
     background-color: #fff;
 }
+
+.block--center {
+    width: 240px;
+    height: 240px;
+}

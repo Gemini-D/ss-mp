@@ -18,6 +18,10 @@ Page({
             content: "",
             type: 0
         },
+        detailPopup: {
+            visible: false,
+            content: ""
+        },
         typeSelector: [
             {
                 label: '文本',
@@ -91,6 +95,12 @@ Page({
         });
     },
 
+    onDetailVisibleChange(e: WechatMiniprogram.TouchEvent) {
+        this.setData({
+            ["detailPopup.visible"]: e.detail.visible,
+        });
+    },
+
     async cancelPopup() {
         this.setData({ popup: { visible: false, title: "", content: "", type: 0 } })
     },
@@ -114,7 +124,7 @@ Page({
     },
 
     bindTapItem(e: WechatMiniprogram.TouchEvent) {
-        console.log(e)
+        const id: number = e.currentTarget.dataset.id
         ActionSheet.show({
             theme: ActionSheetTheme.List,
             selector: '#t-action-sheet',
@@ -122,14 +132,37 @@ Page({
             items: [
                 {
                     label: '查看',
-                    index: 1
+                    index: 1,
+                    id: id
                 },
                 {
                     label: '编辑',
-                    index: 2
+                    index: 2,
+                    id: id
                 },
             ],
         });
+    },
+
+    async handleSelected(e: WechatMiniprogram.TouchEvent) {
+        const index: number = e.detail.selected.index
+        const id: number = e.detail.selected.id
+
+        switch (index) {
+            case 1:
+                const res: Response<ContentSchema> = await content(id)
+                this.setData({
+                    ["popup.visible"]: false,
+                    detailPopup: {
+                        visible: true,
+                        content: res.data.content
+                    }
+                });
+                break
+            case 2:
+                await this.bindEdit(id)
+                break
+        }
     },
 
     showPopup() {

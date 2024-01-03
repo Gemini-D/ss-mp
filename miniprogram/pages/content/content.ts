@@ -3,6 +3,9 @@ import { content, contents, contentSave } from "../../utils/content";
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { OK } from "../../utils/constant";
 
+const innerAudioContext: WechatMiniprogram.InnerAudioContext = wx.createInnerAudioContext({
+    useWebAudioImplement: true
+})
 Page({
 
     /**
@@ -22,7 +25,7 @@ Page({
         detailPopup: {
             visible: false,
             content: "",
-            title:"",
+            title: "",
             type: 0
         },
         picker: {
@@ -52,6 +55,8 @@ Page({
         ]
     },
 
+    innerAudioContext: innerAudioContext,
+
     onLoad(option) {
         this.setData({
             id: parseInt(option.id)
@@ -80,7 +85,7 @@ Page({
                 title: res.data.title,
                 content: res.data.content,
                 type: res.data.type,
-                typeStr:res.data.type_str
+                typeStr: res.data.type_str
             }
         });
     },
@@ -131,22 +136,33 @@ Page({
 
     bindTapItem(e: WechatMiniprogram.TouchEvent) {
         const id: number = e.currentTarget.dataset.id
+        const type: number = e.currentTarget.dataset.type
+        let items: any[] = [
+            {
+                label: type === 1 ? '播放' : '查看',
+                index: 1,
+                id: id
+            },
+            {
+                label: '编辑',
+                index: 2,
+                id: id
+            }
+        ]
+        
+        if (type === 1) {
+            items.push({
+                label: '暂停',
+                index: 3,
+                id: id
+            })
+        }
+
         ActionSheet.show({
             theme: ActionSheetTheme.List,
             selector: '#t-action-sheet',
             context: this,
-            items: [
-                {
-                    label: '查看',
-                    index: 1,
-                    id: id
-                },
-                {
-                    label: '编辑',
-                    index: 2,
-                    id: id
-                },
-            ],
+            items: items,
         });
     },
 
@@ -157,6 +173,12 @@ Page({
         switch (index) {
             case 1:
                 const res: Response<ContentSchema> = await content(id)
+                if (res.data.type === 1) {
+                    this.innerAudioContext.src = res.data.content
+                    this.innerAudioContext.seek(0)
+                    this.innerAudioContext.play()
+                    break
+                }
                 this.setData({
                     ["popup.visible"]: false,
                     detailPopup: {
@@ -169,6 +191,9 @@ Page({
                 break
             case 2:
                 await this.bindEdit(id)
+                break
+            case 3:
+                this.innerAudioContext.stop()
                 break
         }
     },

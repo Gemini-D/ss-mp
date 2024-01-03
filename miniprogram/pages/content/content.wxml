@@ -3,7 +3,7 @@
     <ad unit-id="adunit-61ff3f4d937ee88f"></ad>
     <t-divider content="内容列表" align="left"/>
     <t-cell wx:for="{{contents}}" title="{{item.title}}"
-            data-id="{{item.id}}" align="top" hover arrow bordered="{{false}}"
+            data-id="{{item.id}}" data-type="{{item.type}}" align="top" hover arrow bordered="{{false}}"
             bindtap="bindTapItem">
     </t-cell>
     <t-fab icon="add" bind:click="showPopup" aria-label="新增内容"></t-fab>
@@ -36,9 +36,6 @@
     <t-popup visible="{{detailPopup.visible}}" bind:visible-change="onDetailVisibleChange" placement="center">
         <view class="wrapper">
             <view wx:if="{{detailPopup.type === 0}}" class="block block--center"><text>{{detailPopup.content}}</text></view>
-            <view wx:if="{{detailPopup.type === 1}}" class="block block--center">
-                <audio name="{{detailPopup.title}}" src="{{detailPopup.content}}" id="audio" controls loop></audio>
-            </view>
             <view wx:if="{{detailPopup.type === 2}}" class="block block--center" style="height:1000rpx">
                 <video
                         id="video"

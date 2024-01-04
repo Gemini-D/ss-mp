@@ -80,4 +80,12 @@ Page({
             ["form.value"]: ""
         });
     },
+
+    showNotice() {
+        wx.showModal({
+            title: "提示",
+            content: "输入密钥，解锁内容。所有密钥和内容都会加密存储，不会泄露任何数据。没有提前设置密钥，可以点击右下角的+号，新增密钥。"
+        })
+        console.log(123)
+    }
 })

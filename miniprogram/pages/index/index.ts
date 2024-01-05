@@ -1,6 +1,6 @@
 import { userInfo } from "../../utils/user";
-import { secretCheck, secretCreate } from "../../utils/secret";
-import { Response, SavedSchema, SecretSchema, UserSchema } from "../../utils/schema";
+import { secretCheck, secretCreate, secretMessage } from "../../utils/secret";
+import { MessageSchema, Response, SavedSchema, SecretSchema, UserSchema } from "../../utils/schema";
 import { OK } from "../../utils/constant";
 
 Page({
@@ -81,11 +81,12 @@ Page({
         });
     },
 
-    showNotice() {
+    async showNotice() {
+        const res: Response<MessageSchema> = await secretMessage()
+
         wx.showModal({
             title: "提示",
-            content: "输入密钥，解锁内容。所有密钥和内容都会加密存储，不会泄露任何数据。没有提前设置密钥，可以点击右下角的+号，新增密钥。"
+            content: res.data.message
         })
-        console.log(123)
     }
 })

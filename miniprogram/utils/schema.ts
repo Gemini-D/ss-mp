@@ -39,3 +39,7 @@ export interface ContentSchema {
     type: number,
     type_str: string
 }
+
+export interface MessageSchema {
+    message: string
+}

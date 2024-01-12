@@ -94,5 +94,11 @@ Page({
             title: "提示",
             content: res.data.message
         })
+    },
+
+    async bindUid() {
+        wx.setClipboardData({
+            data: "" + this.data.user.id
+        })
     }
 })

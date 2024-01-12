@@ -6,6 +6,9 @@ import { OK } from "../../utils/constant";
 Page({
     data: {
         secret: "",
+        user: {
+            id: 0
+        },
         popup: {
             visible: false,
         },
@@ -16,6 +19,9 @@ Page({
 
     async onLoad() {
         const info: Response<UserSchema> = await userInfo()
+        this.setData({
+            user: info.data
+        })
         if (!info.data.has_secret) {
             wx.showModal({
                 title: "提示",

@@ -1,5 +1,12 @@
-import { ContentListSchema, ContentSchema, Response, SavedSchema } from "../../utils/schema";
-import { content, contents, contentSave } from "../../utils/content";
+import {
+    ContentListSchema,
+    ContentSchema,
+    ContentTypeSchema,
+    GachaLogSchma,
+    Response,
+    SavedSchema
+} from "../../utils/schema";
+import { content, contents, contentSave, gacha, typeList } from "../../utils/content";
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { OK } from "../../utils/constant";
 
@@ -31,6 +38,7 @@ Page({
         picker: {
             visible: false,
         },
+        gacha: [],
         typeSelector: [
             {
                 label: '文本',
@@ -57,9 +65,14 @@ Page({
 
     innerAudioContext: innerAudioContext,
 
-    onLoad(option) {
+    async onLoad(option) {
         this.setData({
-            id: parseInt(option.id)
+            id: parseInt(option.id),
+        })
+
+        const res: Response<ContentTypeSchema[]> = await typeList()
+        this.setData({
+            typeSelector: res.data
         })
     },
 
@@ -149,7 +162,7 @@ Page({
                 id: id
             }
         ]
-        
+
         if (type === 1) {
             items.push({
                 label: '暂停',
@@ -178,6 +191,12 @@ Page({
                     this.innerAudioContext.seek(0)
                     this.innerAudioContext.play()
                     break
+                }
+                if (res.data.type === 4) {
+                    const logs: Response<GachaLogSchma[]> = await gacha(id)
+                    this.setData({
+                        gacha: logs.data
+                    })
                 }
                 this.setData({
                     ["popup.visible"]: false,

@@ -43,3 +43,16 @@ export interface ContentSchema {
 export interface MessageSchema {
     message: string
 }
+
+export interface ContentTypeSchema {
+    label: string
+    value: number
+    block: boolean
+}
+
+export interface GachaLogSchma {
+    name: string
+    type: string
+    rank: number
+    num: number
+}

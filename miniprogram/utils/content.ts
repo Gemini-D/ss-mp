@@ -27,3 +27,9 @@ export function gacha(id: number): Promise<Response<GachaLogSchma[]>> {
         gacha_type: 301
     })
 }
+
+export function freshGacha(id: number): Promise<Response<SavedSchema>> {
+    return post("/content/fresh-gacha", {
+        id,
+    })
+}

@@ -6,7 +6,7 @@ import {
     Response,
     SavedSchema
 } from "../../utils/schema";
-import { content, contents, contentSave, gacha, typeList } from "../../utils/content";
+import { content, contents, contentSave, freshGacha, gacha, typeList } from "../../utils/content";
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { OK } from "../../utils/constant";
 
@@ -171,6 +171,14 @@ Page({
             })
         }
 
+        if (type === 4) {
+            items.push({
+                label: '刷新',
+                index: 4,
+                id: id
+            })
+        }
+
         ActionSheet.show({
             theme: ActionSheetTheme.List,
             selector: '#t-action-sheet',
@@ -213,6 +221,20 @@ Page({
                 break
             case 3:
                 this.innerAudioContext.stop()
+                break
+            case 4:
+                const saved: Response<SavedSchema> = await freshGacha(id)
+                if (saved.code == OK) {
+                    wx.showModal({
+                        title: "提示",
+                        content: "已进入刷新队列，请稍后"
+                    })
+                } else {
+                    wx.showModal({
+                        title: "提示",
+                        content: saved.message
+                    })
+                }
                 break
         }
     },
